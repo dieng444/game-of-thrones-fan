@@ -1,0 +1,75 @@
+<?php
+namespace Minijournal\Image\Manager;
+
+use Minijournal\Image\Entity\Image;
+use Slyboot\Main\Manager\MainManager;
+use Slyboot\Main\Entity\MainEntity;
+use \PDO;
+/**
+ * Class ImageManager : cette classe gère tout ce qui est
+ * inétractions avec la base de données.
+ * @author Macky Dieng
+ * @copyright	M1DNR2I - 2015
+ * @license : Académique
+ */
+class ImageManager extends MainManager
+{
+
+    /**
+     * @var string : le nom de la table sur laquelle
+     * les opérations vont s'effectuées.
+     */
+	const TABLE_NAME = 'images';
+	/**
+	 * @var string :namespace de la classe
+	 * courante
+	 */
+	const OBJ_CLASS_NAME = '\\Minijournal\\Image\\Entity\\Image';
+	/**
+	 * Constructeur de la classe, qui permete d'initialiser
+	 * la variable d'instance de PDO
+	 */
+	public function __construct()
+	{
+	    parent::__construct();
+	}
+    /**
+     * @static méthode static renvoyant la
+     * chaîne de réquête sql à exécuter à la classe
+     * parente
+     * @return string
+     */
+    protected static function getRequete()
+    {
+        $requete = ' SET articleId = :articleId,
+                     name = :name, titre = :titre,
+                     photographe = :photographe,
+                     droit = :droit,  dateDeCreation = Now()';
+
+        return $requete;
+    }
+    /**
+     * @static : méthode static permettant
+     * d'exécuter les réquête sql
+     * @param $stm : la réquête à exécuter
+     * @param $image : l'objet Image sur lequel
+     * l'exécution doit s'effectuer
+     * @param $mode : le mode d'exécution de la requête
+     * (insert ou update)
+     * @return void
+     */
+    protected static function bind($stm, MainEntity $image, $mode)
+    {
+        if ($mode =='update') {
+            $stm->bindValue(':id',(int)$image->getId());
+        }
+		$stm->bindValue(':articleId',$image->getArticleId());
+		$stm->bindValue(':name',$image->getName());
+		$stm->bindValue(':titre',$image->getTitre());
+		$stm->bindValue(':photographe',$image->getPhotographe());
+		$stm->bindValue(':droit',$image->getDroit());
+
+		return $stm->execute());
+    }
+}
+

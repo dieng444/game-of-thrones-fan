@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+{%block title%}Ajouter des images{%endblock%}
+
+{%block body%}
+    <div id="block-image-form">
+        <form action="/Slyboot-1.1.0/image/add/{%if image !=null %}{{image.articleId}}{%else%}{{articleId}}{%endif%}" method="post" enctype="multipart/form-data" id="image-form">
+            <label for="titre"><span class="mandatory">*</span>Titre</label>
+            <input name="titre" type="text" id="titre" class="form-child img-input" value="{%if image!=null %}{{image.titre}}{%else%}{{form.post("titre")}}{%endif%}"/>
+            <div class="error" style="color:red;"><span>{{form.error("titre") | raw }}</span></div>
+            <label for="photographe"><span class="mandatory">*</span>Photographe</label>
+            <input name="photographe" type="text" id="photographe" class="form-child img-input" value="{% if image!=null %}{{image.photographe}}{%else%}{{form.post("photographe")}}{%endif%}"/>
+            <div class="error" style="color:red;"><span>{{form.error("photographe") | raw }}</span></div>
+            <label for="droit"><span class="mandatory">*</span>Droit</label>
+            <input name="droit" type="text" id="droit" class="form-child img-input" value="{% if image!=null %}{{image.droit}}{%else%}{{form.post("droit")}}{%endif%}"/>
+            <div class="error" style="color:red;"><span>{{form.error("droit") | raw }}</span></div>
+            <label for="image" id="image">Ajouter une image à votre article</label>
+            <input type="file" name="file" id="file" /><br>
+            <input type="hidden" name="articleId" id="articleId" value="{% if image!=null %}{{image.articleId}}{%else%}{{articleId}}{%endif%}"/><br>
+            <input type="hidden" name="id" value="{% if image!=null %}{{image.id}}{%else%}{{form.post("id")}}{%endif%}"/>
+            <input type="hidden" name="name" value="{% if image!=null %}{{image.name}}{%else%}{{form.post("name")}}{%endif%}"/>
+            <input type="submit" name="img-btn-sbmt" id="img-btn-sbmt"  value="Envoyer" class="btn btn-primary imb-btn">
+        </form>
+		<h2>Vous pouvez aussi utiliser les images Flickr</h2>
+		<h4>Cliquez sur le bouton <i>search</i> pour lancer la recherche</h4>
+		<h4>Note : vous devez cliquer sur les images pour les sélectionnées ou déselectionnées.</h4>
+		<h4>Les images sélectionnées passent en jaune. Puis cliquez sur le bouton enregistrer</h4>
+		<h4>pour enregistrer les images que vous avez sélectionnées.</h4>
+	    <input type="text" name="tag" id="tag" placeholder="Tapez le nom d'une ville ici"/>
+	    <button type="button" id="flickr-search">search</button>
+	    <div id="photo-container">
+
+	    </div>
+	    <br>
+		<button type="button" id="flk-img-btn" class="btn btn-primary">Enregistrer les images</button><br><br>
+    </div>
+{%endblock%}

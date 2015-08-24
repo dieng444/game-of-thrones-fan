@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{%block title%}Se connecter{%endblock%}
+{%block body%}
+    <div id="block-login-form">
+        {% if error !=null %}
+            <div class="error" style="color:red;"><span> {{error}} </span></div>
+        {%endif%}
+        {% if session !=null %}
+            <h3>Connectez vous avec vos nouveaux identifiants</h3>
+        {%else%}
+            <h3>Connectez vous</h3>
+        {%endif%}
+        <form action="/Slyboot-1.1.0/login" method="post">
+            <label for="titreIma"><span class="mandatory">*</span>Identifiant</label>
+            <input name="login" type="text" id="login" class="form-child auth-input" value=""/>
+            <label for="password"><span class="mandatory">*</span>Mot de passe</label>
+            <input name="password" type="password" id="password" class="form-child auth-input"/><br>
+            <input type="submit" name="auth-btn-sbmt" id="auth-btn-sbmt" value="Se connecter" class="btn btn-primary auth-btn">
+        </form>
+    </div>
+{%endblock%}

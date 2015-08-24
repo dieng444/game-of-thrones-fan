@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+{%block title%}{{image.titre}}{%endblock%}
+{%block body%}
+    <div id="block-image">
+        <figure class="img-display-layout">
+            {% if image.name matches '/^https|http$/' %}
+               <img alt="{{image.name}}" src="{{image.name}}"/>
+           {%else%}
+               <img alt="{{image.titre}}" src="/Slyboot-1.1.0/resources/public/uploads/images/articles/{{image.name}}"/>
+           {%endif%}
+            <figcaption>
+                 {{image.titre}}<br>
+                 Photo prise par <b>{{image.photographe}}</b><br>
+                 Licence : {{image.droit}}<br>
+                 <a href="/Slyboot-1.1.0/image/edit/{{image.id}}" class="btn btn-edit"><i class="icon-edit"></i>Modifier</a>
+                 <a href="/Slyboot-1.1.0/image/remove/{{image.id}}" class="btn btn-danger btn-action" id="rm-image-link">
+                    <i class="icon-trash"></i>Supprimer
+                 </a>
+           </figcaption>
+        </figure>
+        <a href="/Slyboot-1.1.0/image/list" class="btn" style="margin-top:10px;">
+            <i class="icon-chevron-left"></i>Retouner à la liste des images
+        </a>
+    </div>
+{%endblock%}

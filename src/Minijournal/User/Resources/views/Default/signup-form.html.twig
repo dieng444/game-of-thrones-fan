@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{%block title%}Création de compte{%endblock%}
+{%block body%}
+    <div id="block-signup-form">
+        <form action="/Slyboot-1.1.0/signup" method="post">
+            <label for="role"><span class="mandatory">*</span>Vous êtes ?</label>
+            <select name="role" id="role">
+                <option value="1">Utilisateur</option>
+                <option value="2">Utilisateur/Rédacteur</option>
+            </select>
+            <div class="error" style="color:red;"><span>{{form.error("role") | raw }}</span></div>
+            <label for="username"><span class="mandatory">*</span>Nom d'utilisateur</label>
+            <input name="username" type="text" id="username" class="form-child auth-input" value="{{form.post("username")}}"/>
+            <div class="error" style="color:red;"><span>{{form.error("username") | raw }}</span></div>
+            <label for="password"><span class="mandatory">*</span>Mot de passe</label>
+            <input name="password" type="password" id="password" class="form-child auth-input"/><br>
+            <div class="error" style="color:red;"><span>{{form.error("password") | raw }}</span></div>
+            <label for="lastname"><span class="mandatory">*</span>Nom</label>
+            <input name="lastname" type="text" id="lastname" class="form-child auth-input" value="{{form.post("lastname")}}"/><br>
+            <div class="error" style="color:red;"><span>{{form.error("lastname") | raw }}</span></div>
+            <label for="firstname"><span class="mandatory">*</span>Prénom</label>
+            <input name="firstname" type="text" id="firstname" class="form-child auth-input" value="{{form.post("firstname")}}"/><br>
+            <div class="error" style="color:red;"><span>{{form.error("firstname") | raw }}</span></div>
+            <input type="submit" name="auth-btn-sbmt" id="auth-btn-sbmt" value="Envoyer" class="btn btn-primary auth-btn">
+        </form>
+    </div>
+{%endblock%}

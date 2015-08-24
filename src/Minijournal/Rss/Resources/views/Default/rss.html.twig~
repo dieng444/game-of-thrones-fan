@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+{%block title%} Les actu du site le monde {%endblock%}
+{%block body%}
+<div id="block-event">
+    {%for flux in flux.channel.item%}
+        <article class="article">
+            <h2 class="h2-detail"><a href="{{flux.link}}">{{flux.title}}</a></h2>
+            <div class="desc">
+                <p>{{flux.description}}</p>    
+            </div>
+            <div class="infos">
+                <p>Publié le {{flux.pubDate}}</p>    
+            </div>
+            {{flux.enclosure}}
+            <figure><img src="{{flux.enclosure['url']}}" alt="{{flux.title}}"/></figure>
+        </article>
+    {%endfor%}
+ </div>
+ {%endblock%}

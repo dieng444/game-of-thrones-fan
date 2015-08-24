@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+{%block title%} Gérer les images {%endblock%}
+
+{%block body%}
+    <div id="block-list-image">
+        {%for article in articles%}
+            <h2 class="h2-detail img-side"><a href="/Slyboot-1.1.0/article/detail/{{article.id}}">{{article.titre}}</a></h2>
+            <div class="list-image-thumbnail-container">
+                {%for image in article.images%}
+                    <a href="/Slyboot-1.1.0/image/detail/{{image.id}}" title="Cliquez pour afficher l'image en grand">
+                       <figure class="img-thumbnail">
+			               {% if image.name matches '/^https|http$/' %}
+                               <img alt="{{image.name}}" src="{{image.name}}"
+                           {%else%}
+                               <img alt="{{image.titre}}" src="/Slyboot-1.1.0/resources/public/uploads/images/articles/{{image.name}}"
+                           {%endif%} 
+                           class="img-thumb"/>
+                       </figure>
+                    </a>
+                {%endfor%}
+            </div>
+        {%endfor%}
+    </div>
+{%endblock%}

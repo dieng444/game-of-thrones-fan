@@ -1,0 +1,98 @@
+<?php
+namespace Minijournal\Image\Form;
+
+use Minijournal\Image\Entity\Image;
+use Slyboot\Main\Entity\MainEntity;
+use Slyboot\Main\Form\MainForm;
+use Slyboot\Util\Validator\MainValidator;
+use Slyboot\Util\Validator\ValidatorInterface;
+
+/**
+ * Class ImageForm : Gère le formulaire de l'image
+ * renvoi un formulaire vide ou chargé en fonction
+ * de si l'on est en mode insert ou update
+ * @author Elhadj Macky Dieng
+ * @copyright   M1DNR2I - 2015
+ * @license : Académique
+ */
+class ImageForm extends MainForm implements ValidatorInterface
+{
+
+    /**
+     * @var \AppDieng\Images\Image  :
+     * l'image à insérer ou à modifier
+     *
+     */
+    protected $image;
+
+    public function __construct($image = null)
+    {
+        parent::__construct();
+        $this->image = $image;
+    }
+    /**
+     * @method Renvoi l'image à afficher dans le formulaire
+     * @return \AppDieng\Articles\$article
+     */
+    public function getFormEntity()
+    {
+        return $this->image;
+    }
+    /**
+     * Appelle le gestionnaire d'utilitaire des
+     * validateurs, pour ainsi effectuer la validation
+     * d'un article donné.
+     * @param array $validators : tabeleau de validateurs optionnel
+     * @param array $article : article à valider
+     */
+    public static function validate(MainEntity $entity, $validators = array())
+    {
+        $mainValidator = new MainValidator();
+        $result = $mainValidator->addValidator($validators, $entity);
+        return $result;
+    }
+    /**
+     * Permet aux développeurs de spécifier les validateurs
+     * à utiliser pour le formulaire courant
+     */
+    public function validatorsToUse()
+    {
+        $acceptValidators = array(
+                "FieldLengthValidator",
+                "SelectListValidator",
+                "EmptyFieldValidator"
+        );
+
+        return $acceptValidators;
+    }
+    public function getValidationInfos()
+    {
+        $infos = array( "titre" => array("options" =>
+                        array(
+                                "_blank" => false,
+                                "_min_length" => 4,
+                                "_empty_error_msg" => "Le champ <b>titre</b> ne peut pas être vide",
+                                "_length_error_msg" => "Le champ <b>titre</b> ne pas faire moins de 4 caratcères"
+                        )
+                ),
+                "photographe" => array("options" =>
+                        array(
+                                "_blank" => false,
+                                "_min_length" => 4,
+                                "_empty_error_msg" => "Le champ <b>photographe</b> ne peut pas être vide",
+                                "_length_error_msg" => "Le champ <b>photographe</b> ne pas faire moins de 4 caratcères"
+                        )
+                ),
+                "droit" => array("options" =>
+                        array(
+                                "_blank" => false,
+                                "_min_length" => 4,
+                                "_empty_error_msg" => "Le champ <b>droit</b> ne peut pas être vide",
+                                "_length_error_msg" => "Le champ <b>droit</b> ne pas faire moins de 4 caratcères"
+                        )
+                ),
+        );
+
+        return $infos;
+    }
+}

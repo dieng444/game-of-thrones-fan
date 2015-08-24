@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+{%block title%} Évènements {%endblock%}
+{%block body%}
+<div id="block-event">
+    {%for event in events.events.event%}
+        <div class="event">
+            <h2 class="h2-detail">{{event.titre}}</h2>
+            <h4>{{event.venue.name}} <i>( {{event.venue.city}} )</i></h4>
+            <figure><img src="{{event->image[3]}}" alt="{{event.titre}}"/></figure>
+        </div>
+    {%endfor%}
+ </div>

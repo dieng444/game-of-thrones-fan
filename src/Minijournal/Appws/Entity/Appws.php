@@ -1,0 +1,32 @@
+<?php
+namespace Minijournal\Appws\Entity;
+
+/**
+ * @author Macky Dieng
+ * @license MIT - http://opensource.org/licenses/MIT
+ * @copyright 2015 - the author
+ */
+class Appws
+{
+    public function getEvents()
+    {
+        return $this->getProxy("http://ws.audioscrobbler.com/2.0/?method=geo.getevents&location=paris&api_key=711ee18cdcfee0ccaa250c039af525eb");
+    }
+    public function getEventByLocation($long, $lat)
+    {
+        return $this->getProxy("http://ws.audioscrobbler.com/2.0/?method=geo.getevents&api_key=711ee18cdcfee0ccaa250c039af525eb&long={$long}&lat={$lat}");
+    }
+    public function getProxy($uri)
+    {
+        $url = $uri;
+        $proxy = "http://proxy.unicaen.fr:3128";
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_PROXY, $proxy);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_ENCODING, " ");
+        $data = curl_exec($curl);
+
+        return $data;
+    }
+}
