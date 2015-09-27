@@ -6,4 +6,4 @@ Technologies utiliées : Mini framework Slyboot, Jquery, Sass, Compass, Susy fra
 
 Rôle : Développement Back Office & Front Office
 
-Consulter le projet : http://www.mini-journal.local/
+Consulter le projet : https://21410938.users.info.unicaen.fr/Slyboot-1.1.0/
